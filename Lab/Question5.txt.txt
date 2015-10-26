@@ -1,0 +1,7 @@
+Git uses pointers to keep track of versions and a branch is a collection of such pointers. 
+A new version is linked to the previous ones when it is committed.
+When a user wants to keep the start of the project and build on that in two or more different ways, a branch can be used
+than versions after the branching point are not linked.  
+The head is a pointer that points to the current branch, one can switch the head.
+This is a useful way to save diskspace because the alternative is to open a new project for each branch witch would use 
+the versions before the branching point twice. 
