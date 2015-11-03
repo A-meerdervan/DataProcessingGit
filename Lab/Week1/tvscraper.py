@@ -6,6 +6,7 @@ This script scrapes IMDB and outputs a CSV file with highest ranking tv series.
 '''
 # IF YOU WANT TO TEST YOUR ATTEMPT, RUN THE test-tvscraper.py SCRIPT.
 import csv, codecs, cStringIO
+import unicodedata
 
 from UnicodeWriter import UnicodeWriter
 from pattern.web import URL, DOM, plaintext
@@ -15,6 +16,12 @@ TARGET_URL = "http://www.imdb.com/search/title?num_votes=5000,&sort=user_rating,
 BACKUP_HTML = 'tvseries.html'
 OUTPUT_CSV = 'tvseries.csv'
 
+# this function was copied from source: http://stackoverflow.com/questions/517923/what-is-the-best-way-to-remove-accents-in-a-python-unicode-string
+# Since csv files cannot deal with unicode, this function transforms a unicode accent on a letter into
+# The closest ASCII letter
+def strip_accents(s):
+   return ''.join(c for c in unicodedata.normalize('NFD', s)
+                  if unicodedata.category(c) != 'Mn')
 
 def extract_tvseries(dom):
     '''
@@ -27,22 +34,14 @@ def extract_tvseries(dom):
     - Actors/actresses (comma separated if more than one)
     - Runtime (only a number!)
     '''
-
-    # ADD YOUR CODE HERE TO EXTRACT THE ABOVE INFORMATION ABOUT THE
-    # HIGHEST RANKING TV-SERIES
-    # NOTE: FOR THIS EXERCISE YOU ARE ALLOWED (BUT NOT REQUIRED) TO IGNORE
-    # UNICODE CHARACTERS AND SIMPLY LEAVE THEM OUT OF THE OUTPUT.
     Results =[]
-    #Table = (dom.by_tag("table.results")[:1])[0]
     Table = dom.by_tag("table.results")[0]
-    #print Table.content
     # Loop through the 50 movies/films (tr = table row)
     for ListItem in Table.by_tag("tr")[1:51]:
         SubResult = []
         # The Title
         TitleLink = ListItem.by_tag("a")[1] # Title is the second a type link
-
-        SubResult.append(TitleLink.content) # Byte string to Unicode string.
+        SubResult.append(strip_accents(TitleLink.content)) # Byte string to Unicode string.
         # The Ranking
         RankingBundle = ListItem.by_tag("div.rating rating-list")[0]
         RankingString = RankingBundle.attrs["title"]
@@ -55,7 +54,7 @@ def extract_tvseries(dom):
             Gengres = Gengres + GengreLink.content + ","
         # Remove the last qomma
         Gengres = Gengres[:len(Gengres) - 1]
-        SubResult.append(Gengres)
+        SubResult.append(strip_accents(Gengres))
         # Actors
         ActorsBundle = ListItem.by_tag("span.credit")[0]
         Actors = ""
@@ -63,7 +62,7 @@ def extract_tvseries(dom):
             Actors = Actors + ActorLink.content + ","
         # Remove the last qomma
         Actors = Actors[:len(Actors) - 1]
-        SubResult.append(Actors)
+        SubResult.append(strip_accents(Actors))
         # Runtime (if the list is empyt there is no known runtime)
         if len(ListItem.by_tag("span.runtime")) == 0:
             SubResult.append("unknown")
@@ -106,12 +105,6 @@ if __name__ == '__main__':
 
     # Extract the tv series (using the function you implemented)
     tvseries = extract_tvseries(dom)
-    for Row in tvseries:
-        RowString = ""
-        for Item in Row:
-            RowString += Item + " | "
-        print RowString
-        print
 
     # Write the CSV file to disk (including a header)
     with open(OUTPUT_CSV, 'wb') as output_file:
