@@ -1,0 +1,15 @@
+
+Week 2.
+
+Q. Op lijn 166 ofzo in mijn JS tutorial file daar staat een functie die zou moeten werken maar dat deed ie niet
+Ik heb m gefixt. (zie de code)
+Q. Wanneer moet je nou wel, en wanneer niet, een ; toevoegen aan het eind van een regel?
+
+
+Week 1.
+
+Q. Hoezo kan ik niet de functie decode_utf8(string) gebruiken? Staat bij de documentatie van DOM als sub functie van plaintext maar
+hij zegt dat ie onbekent is voor m?
+
+Q. Ik heb een UnicodeWriter bestand dat fixt dat ie in unicode word opgeslagen. 
+	Waarom is het dan zo dat 

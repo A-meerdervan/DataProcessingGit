@@ -98,13 +98,13 @@ ApplePie.ingredients.forEach(function (element, index){
 // The idea of passing a function to another function becomes even more
 // clear if we first declare the function. Like so:
 
-/*
+
 function log(element, index) {
 	console.log('a[' + index + '] ' + element);
 };
 
 ApplePie.ingredients.forEach(log);
-*/
+
 
 // Exercise 3:
 // ------ Changing html elements and using function callbacks ------
@@ -133,6 +133,26 @@ ApplePie.ingredients.forEach(log);
 // You will probably find .addEventListener() very usefull. Make sure to pass around
 // your print function to the on-click event.
 
+// Get the creator
+// Header = document.getElementById("header")
+// Creator = Header.getElementsByTagName("p")[0]
+// ApplePie.creator = Creator.innerHTML
+// // Get the Ingredients
+// IngredientsBundle = document.getElementById("ingredient-list")
+// console.log(IngredientsBundle)
+// IngredientsList = IngredientsBundle.getElementsByTagName("li")
+
+ImageElement = document.getElementsByTagName("img")[0]
+ImageElement.addEventListener("click", onClickImage)
+
+function onClickImage() {
+	console.log("Ewa")
+	for (var i = 0; i < 4; i++) {
+		console.log("Fakka G "+ i)
+	}
+	console.log("Peace")
+};
+
 // Introduction to functions returning functions
 // ------------------- function returns  -----------------
 
@@ -140,17 +160,27 @@ ApplePie.ingredients.forEach(log);
 // to return functions inside functions. 
 
 // A good example is the following example:
-/*
+
+// De uit geommente create_printfunction doet het niet, dus meld dit aan jasper
+
 function Create_printfunction(input) {
 	var message = 'Thank you for the recipe, ' + input.creator
 	return function(another_message){
-		console.log(message + another_message);
-	}
-}
+		console.log(message + another_message)
+	};
+};
+
+
+// function Create_printfunction(input) {
+// 	var message = 'Thank you for the recipe, ' + input.creator
+// 	return function(another_message){
+// 		console.log(message + another_message);
+// 	}
+// }
 
 var print_function = Create_printfunction(ApplePie);
 print_function(' and thank you cs50 for our programming skills!')
-*/
+
 
 // The function Create_printfunction has a return statement. However, it does
 // not simply return a value like we are used to, but it returns a function.
@@ -239,26 +269,34 @@ print_function(' and thank you cs50 for our programming skills!')
 // for both the scaling factor alpha, and the padding beta.
 // The advantage of this function is that, because it is generic, it can be applied to any domain and range. 
 // Therefor you can call it for any axis that you create and you neither have to make calculations by hand nor hardcode any values.
-/*
+
+//range stands for the pixels
+//domain stands for the values to be represented on the axis
 function createTransform(domain, range){
-	// domain is a two-element array of the domain's bounds
-	// range is a two-element array of the range's bounds
-	// implement the actual calculation here
-	var beta = ...;
-	var alpha = ...;
+	var startDomain = domain[0]
+	var endDomain = domain[1]
+	var beta = range[0];
+	var alpha = (range[1] - range[0]) / (domain[1] - domain[0]);
 
 	return function(x){
-		return alpha * x + beta;
+		if (x < startDomain || x > endDomain){
+			console.log(" (inside createTransform:) The value was outside the domain bounds")
+		}
+		else{ return (x - startDomain) * alpha + beta;}
 	};
 }
 
-// to use this for instance:
-var transform = createTransform([10, 20], [10, 20]);
-console.log(transform(15)); //should return 15!!
-*/
+// Testing:
+var transform = createTransform([10, 20], [300, 800]);
+console.log(transform(15)); //should return 550
 
-// Make sure to test your createTransform function thouroughly
-// and to become familiar with how it actually works, because 
-// you need it for the next 2 weeks! 
+var transform = createTransform([10, 20], [10, 20]);
+console.log(transform(15)); //should return 15
+
+var transform = createTransform([10, 20], [300, 800]);
+console.log(transform(10)); //should return 300
+
+var transform = createTransform([10, 20], [300, 800]);
+console.log(transform(5)); //should give error
 
 
