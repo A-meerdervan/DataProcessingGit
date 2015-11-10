@@ -43,7 +43,8 @@
 		border-radius: 5px;
 }
 
-			
+			
+
 #hikashop_category_information_module_87 div.hikashop_subcontainer {
 	background:#FFFFFF;
 }
@@ -71,7 +72,10 @@
 		border-radius: 5px;
 }
 
-			.childcontent .gkcol { width: 200px; }@media screen and (max-width: 768px) {
+			
+.childcontent .gkcol { width: 200px; }
+
+@media screen and (max-width: 768px) {
     	#k2Container .itemsContainer { width: 100%!important; } 
     	.cols-2 .column-1,
     	.cols-2 .column-2,
@@ -81,11 +85,12 @@
     	.demo-typo-col2,
     	.demo-typo-col3,
     	.demo-typo-col4 {width: 100%; }
-    	}#gkSidebar { width: 30%; }
-#gkContent { width: 70%; }
-#gkContentWrap { width: 100%; }
-.gkPage { max-width: 1230px; }
-
+    	}
+#gkSidebar { width: 30%; }
+#gkContent { width: 70%; }
+#gkContentWrap { width: 100%; }
+.gkPage { max-width: 1230px; }
+
 #hikashop_category_information_module_92 div.hikashop_subcontainer {
 	background:#FFFFFF;
 }
@@ -371,7 +376,7 @@ function hikashop_send_comment(){ //Action on submit comment
 }
 
 //-->
-jQuery(function($) {
+jQuery(function($) {
 			 $('.hasTip').each(function() {
 				var title = $(this).attr('title');
 				if (title) {
@@ -382,12 +387,13 @@ function hikashop_send_comment(){ //Action on submit comment
 				}
 			});
 			var JTooltips = new Tips($('.hasTip').get(), {"maxTitleChars": 50,"fixed": false});
-		});<!--
+		});
+<!--
 var hikashopFieldsJs=Array();
 			hikashopFieldsJs['reqFieldsComp']=Array();
 			hikashopFieldsJs['validFieldsComp']=Array();
 //-->
-<!--
+<!--
 
 			function hikashopToggleFields(new_value,namekey,field_type,id,prefix){
 				var arr = new Array();
@@ -473,7 +479,7 @@ var hikashopFieldsJs=Array();
 $GK_TMPL_URL = "http://www.yenom.nl/supermarktaanbiedingen/templates/gk_msocial";
 
 $GK_URL = "http://www.yenom.nl/supermarktaanbiedingen/";
-window.addEvent('domready', function(){ new Fx.Accordion($$('div#category_panel_92.pane-sliders > .panel > h3.pane-toggler'), $$('div#category_panel_92.pane-sliders > .panel > div.pane-slider'), {"onActive": function(toggler, i) {toggler.addClass('pane-toggler-down');toggler.removeClass('pane-toggler');i.addClass('pane-down');i.removeClass('pane-hide');Cookie.write('jpanesliders_category_panel_92',$$('div#category_panel_92.pane-sliders > .panel > h3').indexOf(toggler));},"onBackground": function(toggler, i) {toggler.addClass('pane-toggler');toggler.removeClass('pane-toggler-down');i.addClass('pane-hide');i.removeClass('pane-down');if($$('div#category_panel_92.pane-sliders > .panel > h3').length==$$('div#category_panel_92.pane-sliders > .panel > h3.pane-toggler').length) Cookie.write('jpanesliders_category_panel_92',-1);},"duration": 300,"show": 9,"opacity": "false","alwaysHide": "true"}); });
+window.addEvent('domready', function(){ new Fx.Accordion($$('div#category_panel_92.pane-sliders > .panel > h3.pane-toggler'), $$('div#category_panel_92.pane-sliders > .panel > div.pane-slider'), {"onActive": function(toggler, i) {toggler.addClass('pane-toggler-down');toggler.removeClass('pane-toggler');i.addClass('pane-down');i.removeClass('pane-hide');Cookie.write('jpanesliders_category_panel_92',$$('div#category_panel_92.pane-sliders > .panel > h3').indexOf(toggler));},"onBackground": function(toggler, i) {toggler.addClass('pane-toggler');toggler.removeClass('pane-toggler-down');i.addClass('pane-hide');i.removeClass('pane-down');if($$('div#category_panel_92.pane-sliders > .panel > h3').length==$$('div#category_panel_92.pane-sliders > .panel > h3.pane-toggler').length) Cookie.write('jpanesliders_category_panel_92',-1);},"duration": 300,"show": 9,"opacity": "false","alwaysHide": "true"}); });
   </script>
   <link rel="apple-touch-icon" href="http://www.yenom.nl/supermarktaanbiedingen/templates/gk_msocial/images/touch-device.png">
   <link rel="apple-touch-icon-precompose" href="http://www.yenom.nl/supermarktaanbiedingen/templates/gk_msocial/images/touch-device.png">
