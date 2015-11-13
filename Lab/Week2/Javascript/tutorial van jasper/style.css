@@ -1,5 +1,11 @@
 
 /* Een setje is een dif tag ofzo*/
 .container {
-	text-align: center;
+	text-align: right;
+}
+
+h1 {
+    color:blue;
+    font-family:verdana;
+    font-size:300%;
 }

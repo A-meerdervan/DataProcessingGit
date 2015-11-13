@@ -1,3 +1,13 @@
+Week 3.
+
+Q. het drawline ctx is onbekend gebeuren mailen naar Jasper
+
+Q. Kun je laten zien welke variabelen je allemaal overbodig vind? (feedback scraper)
+
+Q. Hoe moet ik een object maken in js die ik meerdere keren kan instantieren?
+	een struct idee
+	
+Q. Hoe moet je een csv reader vanaf een bepaalde regel laten beginnen?
 
 Week 2.
 
