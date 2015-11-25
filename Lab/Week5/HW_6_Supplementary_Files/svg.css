@@ -1,0 +1,25 @@
+/* continent color */
+path.eu
+{
+	opacity:1;
+   	fill: rgba(255,218,0,0.8)
+}
+g.eu
+{
+	opacity:1;
+   	fill: rgba(255,218,0,0.8)
+}
+
+/* country colors */
+
+.landxx.fr
+{
+	opacity:1;
+   	fill: rgba(255,150,20,0.8)
+}
+
+.landxx.de
+{
+	opacity:1;
+   	fill: rgb(255,20,100)
+}
