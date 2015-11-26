@@ -1,0 +1,16 @@
+/* Chrome browser specific css */
+
+body.newcp #cp_wdi table.countrytable,
+body.newcp #cp_cc table.countrytable,
+body.newcp #cp_dd table.countrytable,
+body.newcp #cp_fin table.countrytable,
+body.newcp #cp_prop table.countrytable,
+body.newcp #cp_surv table.countrytable {
+  display: block;
+  width: 958px;
+}
+
+.link-button-mid {
+  padding-right: 20px;
+  width: 134px;
+}

@@ -1,0 +1,18 @@
+
+/*hide the textarea with the data*/
+textarea{
+	display:none;
+}
+
+/*
+ * Color the Ocean blue
+ */
+ path.oceanxx
+ {
+   opacity: 1;
+   color: #6baed6;
+   fill:#9ecae1;
+   stroke:#000;
+   stroke-width:0.5;
+   stroke-miterlimit:1;
+ }
