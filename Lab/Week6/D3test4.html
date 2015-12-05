@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+
+
+<html lang="en"><head>
+<meta charset="utf-8">
+<title>D3 Page Template</title>
+<script type="text/javascript" src="http://d3js.org/d3.v3.min.js"></script>
+
+
+<style>
+
+/*hide the textarea with the data*/
+textarea{
+  display:none;
+}
+
+.bar {
+  fill: steelblue;
+}
+
+.bar:hover {
+  fill: brown;
+}
+
+.axis {
+  font: 10px sans-serif;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.x.axis path {
+  display: none;
+}
+</style>
+
+</head>
+<body>
+  <!-- The data to be used in JSON format -->
+  <textarea id = "JSONdata">[["l", 4],["r", 8],["f", 15],["j", 16],["s", 23],["k", 42]]</textarea>
+
+  <svg class="chart"></svg>
+
+
+<script src="D3test4.js"></script>
+
+</body>
+
+</html>

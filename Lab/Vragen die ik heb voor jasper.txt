@@ -1,3 +1,7 @@
+Week 6. 
+
+Q. Hoe stop je iets aan de bovenkant van je pagina? select body en dan insert is blijkbaar niet genoeg. 
+
 Week 4.
 
 Q. Hoe fix je dat je uit een file de JSON uitleest, das toch niet toegelaten vanuit een browser?
