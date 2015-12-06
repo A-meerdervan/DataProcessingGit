@@ -1,0 +1,10 @@
+
+In d3line en d3line-kopie-kopie zitten exact dezelfde files
+
+maar d3line-kopie-kopie is degene die je moet zien
+
+Om de een of andere gekke reden, zijn de fonts anders in de d3line folder, 
+
+hoe kan dat!!!???
+
+super vaag

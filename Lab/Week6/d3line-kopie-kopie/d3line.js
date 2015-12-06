@@ -7,6 +7,11 @@ data = []
 
 textArea = document.getElementById("rawData").innerHTML
 
+// THIS DID NOT WORK, because I am not a server
+// Get the data from a Json file
+// d3.json("d3line.json", function(d) {
+//   rawData = d
+// })
 rawData = JSON.parse(textArea)
 
 for (var i = 0; i < rawData.length; i++) {
@@ -19,13 +24,14 @@ for (var i = 0; i < rawData.length; i++) {
 
 // d3.select("body").style("font-size","34px")
 
-totalWidth = window.innerWidth * 0.6
+totalWidth = window.innerWidth * 0.5
 totalHeight = totalWidth * 0.5
-margin = {top: 0.1 * totalHeight, right: 0.15 * totalWidth, bottom: 0.1 * totalHeight, left: 0.13 * totalWidth}
+margin = {top: 0.2 * totalHeight, right: 0.18 * totalWidth, bottom: 0.2 * totalHeight, left: 0.13 * totalWidth}
 width =  totalWidth - margin.left - margin.right
 height = totalHeight - margin.top - margin.bottom
 fontSize1 = 15
 fontSize2 = 14
+delay = 800
 
 // Create the chart svg variable
 
@@ -59,6 +65,12 @@ chart.append("g")
     .attr("class", "x axis")
     .attr("transform", "translate(0," + height + ")")
     .call(xAxis)
+    // Add label
+  .append("text")
+    .attr("transform", "translate(" + (0.7*width) + "," + (0.7*margin.bottom) + ")")
+    .style("text-anchor", "right")
+    .style("font-size", fontSize1)
+    .text("the day of the year")
 
 // append  Y axis
 
@@ -68,10 +80,17 @@ chart.append("g")
     // Add label
   .append("text")
     .attr("transform", "rotate(-90)")
-    .attr("y", - 0.8 * margin.left)
+    .attr("y", - 0.6 * margin.left)
     .style("text-anchor", "end")
     .style("font-size", fontSize1)
     .text("Temperature in degrees")
+
+// Create the Title
+chart.append("text")
+    .attr("transform", "translate(" + (0.1*width) + "," + (- 0.3*margin.top) + ")")
+    // .style("text-anchor", "end")
+    .style("font-size", fontSize1 * 1.2)
+    .text("Maximum temperature per day in \"De Bilt(NL) during 1994")
 
 // Create a function that will be able to draw the data line
 var lineGen = d3.svg.line()
@@ -98,20 +117,21 @@ chart.append('path')
 
 // Create temperature tooltip text
 var toolTipTemp = chart.append("g")
-  .attr("class","tooltipText")
+  .attr("class","tooltip tooltipText")
   .style("display", "none")
 
 // toolTipTemp.append("text")
 
 
 var toolTipDate = chart.append("g")
-  .attr("class", "tooltipText")
+  .attr("class", "tooltip tooltipText")
   .style("display", "none")
 
 // toolTipDate.append("text")
 
 d3.selectAll(".tooltipText")
   .append("rect")
+  .attr("class", "tooltip")
   .attr("position", "absolute")
   .attr("y", -0.05*height)
   .style("width", 0.2* width)
@@ -119,9 +139,10 @@ d3.selectAll(".tooltipText")
   .style("padding", 8)
   .style("fill", "#ffffff")
 
-
-d3.selectAll(".tooltipText")
+tooltipsText = d3.selectAll(".tooltipText")
+tooltipsText
   .append("text")
+  .attr("class", "tooltip tooltipText")
   .style("font-size", fontSize2)
 
 // add cross hairs and floating value on axis
@@ -167,17 +188,18 @@ crossHairs = chart.append("g")
           "mousemove": mousemove
         })
   
+tooltipGroup = d3.selectAll(".tooltip")
 
 function mouseover() {
-  crossHairs.style("display", null)
-  toolTipTemp.style("display", null)
-  toolTipDate.style("display", null)
+  tooltipGroup.style("display", "none")
+  // clearTimeout(timeOut)
+
+
 }
 
 function mouseout() {
-  crossHairs.style("display", "none")
-  toolTipTemp.style("display", "none")
-  toolTipDate.style("display", "none")
+  tooltipGroup.style("display", "none")
+  clearTimeout(timeOut)
 }
 
 // This map is used to map the 0 to 11 values from the getMonth() 
@@ -185,24 +207,39 @@ function mouseout() {
 monthMap = ["Januarie", "Februari", "March", "April", "Mai", "June", "Juli", "August", "September", "Oktober", "November", "December"]
 
 function mousemove() {
-  // crossHairs.style("display", "none")
-  // toolTipDate.style("display", "none")
-  // toolTipTemp.style("display", "none")
-  crossHairs.style("display", "block")
-
-  day = Math.round(xTrans.invert(d3.event.pageX - margin.left))
-  xTranslation = (d3.event.pageX - margin.left)
+  // Hide the tooltip text boxes but not the lines
+  tooltipGroup.style("display", "block")
+  tooltipsText.style("display", "none")
+  // Save the mouse position
+  mouseX = d3.event.pageX
+  mouseY = d3.event.pageY
+  // Update the crosshairs
+  day = Math.round(xTrans.invert(mouseX - margin.left))
+  xTranslation = (mouseX - margin.left)
   yTranslation = yTrans(data[day][1])
   crossHairs.attr("transform", "translate(" + xTranslation + "," + yTranslation + ")")
-  // crossHairs.attr("transform", "translate(" + (d3.event.pageX - margin.left) + "," + yTrans(data[day][1]) + ")")
-  // update temperature tooltip
-  toolTipTemp.attr("transform", "translate(" + (xTranslation + 0.05*width) + "," + (yTranslation + 0.05*height) + ")")
-  toolTipTemp.select("text").text(data[day][1] + " Degrees C.")
-  // update date tooltip
-  date = data[day][0]
-  dateString =  date.getDate() + " "  + monthMap[date.getMonth()]
-  toolTipDate.attr("transform", "translate(" + (xTranslation + 0.01*width) + "," + (yTranslation - 0.08*height) + ")")
-  toolTipDate.select("text").text(dateString)
+  
+  // Set the time out for the tooltip
+  timeOut = setTimeout(function() {
+    // day = Math.round(xTrans.invert(mouseX - margin.left))
+    // xTranslation = (mouseX - margin.left)
+    // yTranslation = yTrans(data[day][1])
+    crossHairs.attr("transform", "translate(" + xTranslation + "," + yTranslation + ")")
+    // crossHairs.attr("transform", "translate(" + (d3.event.pageX - margin.left) + "," + yTrans(data[day][1]) + ")")
+    // update temperature tooltip
+    toolTipTemp.attr("transform", "translate(" + (xTranslation + 0.05*width) + "," + (yTranslation + 0.05*height) + ")")
+    toolTipTemp.select("text").text(data[day][1] + " Degrees C.")
+    // update date tooltip
+    date = data[day][0]
+    dateString =  date.getDate() + " "  + monthMap[date.getMonth()]
+    toolTipDate.attr("transform", "translate(" + (xTranslation + 0.01*width) + "," + (yTranslation - 0.08*height) + ")")
+    toolTipDate.select("text").text(dateString)
+    
+    tooltipsText.style("display", "block")
+    clearTimeout(timeOut)
+  // The delay is speciefied at the top of the file  
+  }, delay)
+
 }
 
 

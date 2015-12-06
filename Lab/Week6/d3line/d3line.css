@@ -1,0 +1,20 @@
+/*Only the axis are done here because with other things it did not work 
+for unknown reasons, so I set the properties in d3*/
+
+/*hide the textarea with the data*/
+textarea{
+  display:none;
+}
+
+
+
+.axis {
+  font: 10px sans-serif;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
