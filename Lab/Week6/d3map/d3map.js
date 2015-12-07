@@ -1,4 +1,4 @@
-// Get the data from the textarea and put it in data
+// Get the json data from the textarea and put it in data
 data = []
 
 textArea = document.getElementById("rawData").innerHTML
@@ -9,12 +9,6 @@ textArea = document.getElementById("rawData").innerHTML
 //   rawData = d
 // })
 rawData = JSON.parse(textArea)
-
-var onlyValues = rawData.map(function(obj){ return obj[1]; });
-var minValue = Math.min.apply(null, onlyValues),
-	maxValue = Math.max.apply(null, onlyValues);
-console.log(minValue)
-console.log(maxValue)
 
 // Colours were taken from color brewer
 // This function returns a color code for a data value
