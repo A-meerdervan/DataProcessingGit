@@ -1,0 +1,77 @@
+/*hide the textarea with the data*/
+textarea{
+  display:none;
+}
+
+#container {
+    background-color: #cce5ff;
+}
+
+#legend {
+	position:absolute;
+	top:80px;
+	left: 35px;
+	 width: 100px;
+	 /*height: 100px;*/
+    background-color: #cce5ff;
+}
+
+#populationModel {
+	/*position:absolute;*/
+	/*top:80px;*/
+	/*left: 35px;*/
+	 width: 600px;
+	 height: 150px;
+	 /*height: 100px;*/
+    /*background-color: #cce5ff;*/
+}
+
+p.newPopulationText {
+	position:absolute;
+	top:460px;
+	left: 300px;
+	 width: 100px;
+}
+
+#newPopulation {
+	position:absolute;
+	top:500px;
+	left: 300px;
+	 width: 100px;
+}
+
+#legend dd {
+    width: 20px;
+    margin-right: 6px;
+    border-radius: 3px;
+}
+#legend dt, #legend dd {
+    float: left;
+    margin: 0 3px 0 0;
+    font-size: 12px;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+svg.lineChart {
+/*.lineChart {*/
+position:absolute;
+top:40px;
+left: 500px;
+/*width:500px;*/
+/*height:600px;*/
+}
+
+.axis {
+  font: 11px sans-serif;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.bubble {
+  stroke: #fff;
+}
